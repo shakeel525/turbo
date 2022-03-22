@@ -22,7 +22,7 @@ function Finish(props) {
   }, []);
 
   const sendMail = (data) => {
-    fetch("https://turboracegear.com/turbo-mail/",{
+    fetch("https://mulqiat.herokuapp.com/",{
       
       method: "POST",
       headers: {
