@@ -18,11 +18,11 @@ import print from "print-html-element";
 function Finish(props) {
   React.useEffect(() => {
     // print.printElement( document.getElementById('toPrint') );
-    sendMail(props.contactData);
+    sendMail(props.contactData, props.data);
   }, []);
 
-  const sendMail = (data) => {
-    fetch("https://mulqiat.herokuapp.com/",{
+  const sendMail = (contact,data) => {
+    fetch("https://turbo-mailer.herokuapp.com/api/v1/users/send-mail",{
       
       method: "POST",
       headers: {
@@ -30,9 +30,9 @@ function Finish(props) {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        to: data.to,
+        to: contact.to,
         subject: "Custom Suit Order",
-        msg: `<h1>Customer Name: ${data.name}</h1>`,
+        msg: `<p>Data:${data}</p>`,
       }),
     })
       .then((response) => response.json())
