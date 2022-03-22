@@ -36,7 +36,8 @@ export default function NestedList(props) {
 
   React.useEffect(() => {
     props.setPrice(totalPrice)
-  }, [totalPrice]);
+    props.getOptions(selectedOption)
+  }, [totalPrice,selectedOption]);
 
   const handleCheckbox = (event, key) => {
     let items = checked;
@@ -92,6 +93,7 @@ export default function NestedList(props) {
 
   return (
     <Box className="sidebar">
+      
       <List
         sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         component="nav"

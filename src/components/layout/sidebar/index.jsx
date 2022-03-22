@@ -11,13 +11,17 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
-export default function NestedList() {
+export default function NestedList(props) {
   const [baseColor, setBaseColor] = React.useState(true);
   const [color1, setColor1] = React.useState(false);
   const [color2, setColor2] = React.useState(false);
   const [selectBaseColor, setSelectBaseColor] = React.useState("#1d3170");
   const [selectColor1, setSelectColor1] = React.useState("#ffffff");
   const [selectColor2, setSelectColor2] = React.useState("#ffffff");
+
+  React.useEffect(() => {
+    props.getColors([selectBaseColor, selectColor1, selectColor2]);
+  }, [selectBaseColor, selectColor1, selectColor2]);
 
   return (
     <Box className="sidebar">
@@ -61,13 +65,13 @@ export default function NestedList() {
         <Collapse in={baseColor} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {/* <ListItemButton sx={{ pl: 4 }}> */}
-              <ColorGrid
-                setColor={(e) => {
-                  setSelectBaseColor(e);
-                  const root = document.documentElement;
-                  root.style.setProperty("--baseColor", e);
-                }}
-              />
+            <ColorGrid
+              setColor={(e) => {
+                setSelectBaseColor(e);
+                const root = document.documentElement;
+                root.style.setProperty("--baseColor", e);
+              }}
+            />
             {/* </ListItemButton> */}
           </List>
         </Collapse>
@@ -101,13 +105,13 @@ export default function NestedList() {
         <Collapse in={color1} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {/* <ListItemButton sx={{ pl: 4 }}> */}
-              <ColorGrid
-                setColor={(e) => {
-                  setSelectColor1(e);
-                  const root = document.documentElement;
-                  root.style.setProperty("--color1", e);
-                }}
-              />
+            <ColorGrid
+              setColor={(e) => {
+                setSelectColor1(e);
+                const root = document.documentElement;
+                root.style.setProperty("--color1", e);
+              }}
+            />
             {/* </ListItemButton> */}
           </List>
         </Collapse>
@@ -141,13 +145,13 @@ export default function NestedList() {
         <Collapse in={color2} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {/* <ListItemButton sx={{ pl: 4 }}> */}
-              <ColorGrid
-                setColor={(e) => {
-                  setSelectColor2(e);
-                  const root = document.documentElement;
-                  root.style.setProperty("--color2", e);
-                }}
-              />
+            <ColorGrid
+              setColor={(e) => {
+                setSelectColor2(e);
+                const root = document.documentElement;
+                root.style.setProperty("--color2", e);
+              }}
+            />
             {/* </ListItemButton> */}
           </List>
         </Collapse>

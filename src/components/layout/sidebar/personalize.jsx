@@ -40,6 +40,7 @@ export default function NestedList(props) {
 
   React.useEffect(() => {
     console.warn("selectedOption", selectedOption);
+    props.getOption(selectedOption)
   }, [selectedOption]);
 
   const handleCheckbox = (event, key) => {

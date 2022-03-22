@@ -14,11 +14,32 @@ import Suit2 from "../components/suit2";
 import Suit3 from "../components/suit3";
 import Sidebar from "../components/layout/sidebar/personalize";
 import "../assets/css/main_style.scss";
-import print from "print-html-element"
+import print from "print-html-element";
 function Finish(props) {
-React.useEffect(() => {
-    print.printElement( document.getElementById('toPrint') );
-}, []);
+  React.useEffect(() => {
+    // print.printElement( document.getElementById('toPrint') );
+    sendMail(props.contactData);
+  }, []);
+
+  const sendMail = (data) => {
+    fetch("https://turboracegear.com/turbo-mail/",{
+      
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        to: data.to,
+        subject: "Custom Suit Order",
+        msg: `<h1>Customer Name: ${data.name}</h1>`,
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.error(responseJson);
+      });
+  };
   const SwitchSuit = () => {
     switch (props.cat) {
       case 1:
@@ -33,7 +54,6 @@ React.useEffect(() => {
       case 4:
         return <Suit3 />;
         break;
-
       default:
         return <Suit />;
         break;
@@ -41,8 +61,11 @@ React.useEffect(() => {
   };
   return (
     <div className="DesignScreen">
-      <Sidebar price={props.price}/>
-      <Box className="MainBody" id="toPrint">{SwitchSuit()}</Box>
+      {JSON.stringify(props.data)}
+      <br />
+      <Box className="MainBody" id="toPrint">
+        {SwitchSuit()}
+      </Box>
     </div>
   );
 }

@@ -19,10 +19,14 @@ import Personalize from "../../../screens/Personalize";
 import Finish from "../../../screens/Finish";
 const steps = ["Design", "Colors", "Options", "Personalize", "Finish"];
 
-export default function HorizontalLabelPositionBelowStepper() {
+export default function HorizontalLabelPositionBelowStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [category, setCategory] = React.useState(1);
   const [price, setPrice] = React.useState(449);
+  const [selectedOption, setSelectedOption] = React.useState([]);
+  const [selectedPersonalize, setSelectedPersonalize] = React.useState([]);
+  const [selectedColors, setSelectedColors] = React.useState([]);
+
   const theme = useTheme();
 
   const handleNext = () => {
@@ -47,16 +51,46 @@ export default function HorizontalLabelPositionBelowStepper() {
         );
         break;
       case 1:
-        return <Design cat={category} />;
+        return (
+          <Design getColors={(e) => setSelectedColors(e)} cat={category} />
+        );
         break;
       case 2:
-        return <Options setPrice={(e)=>setPrice(e)} cat={category}/>;
+        return (
+          <Options
+            getOptions={(e) => {
+              setSelectedOption(e);
+            }}
+            setPrice={(e) => setPrice(e)}
+            cat={category}
+          />
+        );
         break;
       case 3:
-        return <Personalize price={price} cat={category}/>;
+        return (
+          <Personalize
+            getOptions={(e) => {
+              setSelectedPersonalize(e);
+            }}
+            price={price}
+            cat={category}
+          />
+        );
         break;
       case 4:
-        return <Finish/>;
+        return (
+          <Finish
+            cat={category}
+            contactData={props.contactData}
+            data={{
+              category: category,
+              price: price,
+              Option: selectedOption,
+              Personalize: selectedPersonalize,
+              Colors: selectedColors,
+            }}
+          />
+        );
         break;
       case 5:
         return <h1>{steps[activeStep]}</h1>;
@@ -69,7 +103,6 @@ export default function HorizontalLabelPositionBelowStepper() {
 
   return (
     <Box className="body" sx={{ width: "100%", position: "relative" }}>
-      
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>

@@ -38,7 +38,7 @@ function Design(props) {
   };
   return (
     <div className="DesignScreen">
-      <Sidebar />
+      <Sidebar getColors={(e)=>props.getColors(e)}/>
       <Box className="MainBody">{SwitchSuit()}</Box>
     </div>
   );

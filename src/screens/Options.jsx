@@ -38,7 +38,7 @@ function Options(props) {
   };
   return (
     <div className="DesignScreen">
-      <Sidebar setPrice={(e)=>props.setPrice(e)} />
+      <Sidebar getOptions={(e)=>{props.getOptions(e)}} setPrice={(e)=>props.setPrice(e)} />
       <Box className="MainBody">{SwitchSuit()}</Box>
     </div>
   );
