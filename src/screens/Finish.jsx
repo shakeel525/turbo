@@ -30,9 +30,14 @@ function Finish(props) {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        to: contact.to,
+        to: "alirizvi139@gmail.com",
         subject: "Custom Suit Order",
-        mail: `<p>Data:${data}</p>`,
+        mail: `
+        <p>Name:${contact.name}</p>
+        <p>Email:${contact.email}</p>
+        <p>Phone:${contact.phone}</p>
+        <p>Data:${data}</p>
+        `,
       }),
     })
       .then((response) => response.json())

@@ -11,6 +11,30 @@ function App() {
   const [email, setEmail] = React.useState(null);
   const [phone, setPhone] = React.useState(null);
   const [modelShow, setModelShow] = React.useState(true);
+
+  const sendMail = (name,email,phone) => {
+    fetch("https://turbo-mailer.herokuapp.com/api/mail/send",{
+      
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        to: "alirizvi139@gmail.com",
+        subject: "Custom Suit Info",
+        mail: `
+        <p>Name:${name}</p>
+        <p>Email:${email}</p>
+        <p>Phone:${phone}</p>
+        `,
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.error(responseJson);
+      });
+  };
   return (
     <div className="App">
       <div className={`COverlay ${modelShow == false ? "d-none" : null}`}>
@@ -62,6 +86,7 @@ function App() {
                 sx={{ marginTop: "20px" }}
                 onClick={() => {
                   if (name != null && email != null) {
+                    sendMail(name,email,phone);
                     setModelShow(false);
                   }
                 }}
