@@ -36,7 +36,7 @@ function Finish(props) {
         <p>Name:${contact.name}</p>
         <p>Email:${contact.email}</p>
         <p>Phone:${contact.phone}</p>
-        <p>Data:${data}</p>
+        <pre>Data:${JSON.stringify(data)}</pre>
         `,
       }),
     })
