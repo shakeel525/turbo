@@ -22,7 +22,7 @@ function Finish(props) {
   }, []);
 
   const sendMail = (contact,data) => {
-    fetch("https://turbo-mailer.herokuapp.com/api/v1/users/send-mail",{
+    fetch("https://turbo-mailer.herokuapp.com/api/mail/send",{
       
       method: "POST",
       headers: {
@@ -32,7 +32,7 @@ function Finish(props) {
       body: JSON.stringify({
         to: contact.to,
         subject: "Custom Suit Order",
-        msg: `<p>Data:${data}</p>`,
+        mail: `<p>Data:${data}</p>`,
       }),
     })
       .then((response) => response.json())
