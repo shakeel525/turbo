@@ -17,13 +17,12 @@ import "../assets/css/main_style.scss";
 import print from "print-html-element";
 function Finish(props) {
   React.useEffect(() => {
-    // print.printElement( document.getElementById('toPrint') );
+    //
     sendMail(props.contactData, props.data);
   }, []);
 
-  const sendMail = (contact,data) => {
-    fetch("https://turbo-mailer.herokuapp.com/api/mail/send",{
-      
+  const sendMail = (contact, data) => {
+    fetch("https://turbo-mailer.herokuapp.com/api/mail/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,11 +65,45 @@ function Finish(props) {
   };
   return (
     <div className="DesignScreen">
-      {JSON.stringify(props.data)}
+      {/* {JSON.stringify(props.data)} */}
       <br />
-      <Box className="MainBody" id="toPrint">
-        {SwitchSuit()}
-      </Box>
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-sm-6">
+            <h1>
+              <b>You almost ready to get start with this amazing custom gear. you can pay initial $100 to start finalizeing design with our design team.</b>
+            </h1>
+            <div className="d-flex">
+              <button
+                onClick={() => {
+                  sendMail(props.contactData, props.data);
+                  print.printElement(document.getElementById("toPrint"));
+                }}
+                className="btn-red mx-2"
+                style={{ marginTop: "50px" }}
+              >
+                Print $ Submit <br/>Design
+              </button>
+              <button
+                onClick={() => {
+                  sendMail(props.contactData, props.data);
+                  window.location.href = "https://buy.stripe.com/6oE4kleC216k7S028b";
+                }}
+                className="btn-red mx-2"
+                style={{ marginTop: "50px" }}
+              >
+                Submit Design <br/>& Pay Securly
+              </button>
+              
+            </div>
+          </div>
+          <div className="col-sm-6">
+            <Box className="MainBody" id="toPrint">
+              {SwitchSuit()}
+            </Box>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

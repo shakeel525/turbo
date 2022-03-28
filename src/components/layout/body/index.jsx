@@ -17,7 +17,7 @@ import Category from "../../../screens/Category";
 import Options from "../../../screens/Options";
 import Personalize from "../../../screens/Personalize";
 import Finish from "../../../screens/Finish";
-const steps = ["Design", "Colors", "Options", "Personalize", "Finish"];
+const steps = ["Design", "Colors", "Options", "Personalize"];
 
 export default function HorizontalLabelPositionBelowStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -72,6 +72,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
             getOptions={(e) => {
               setSelectedPersonalize(e);
             }}
+            setPrice={(e) => setPrice(e)}
             price={price}
             cat={category}
           />
@@ -92,10 +93,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
           />
         );
         break;
-      case 5:
-        return <h1>{steps[activeStep]}</h1>;
-        break;
-
+      
       default:
         break;
     }
@@ -122,7 +120,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
             <Button
               size="small"
               onClick={handleNext}
-              disabled={activeStep === 5}
+              disabled={activeStep === 4}
             >
               Next
               {theme.direction === "rtl" ? (

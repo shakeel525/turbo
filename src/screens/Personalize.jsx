@@ -38,7 +38,7 @@ function Personalize(props) {
   };
   return (
     <div className="DesignScreen">
-      <Sidebar getOption={(e)=>props.getOptions(e)} price={props.price}/>
+      <Sidebar getOption={(e)=>props.getOptions(e)} price={props.price} setPrice={(e)=>props.setPrice(e)}/>
       <Box className="MainBody">{SwitchSuit()}</Box>
     </div>
   );
